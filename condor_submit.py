@@ -113,7 +113,7 @@ exec_args.add_argument("-y", "--year", default="UL18", choices=['UL16postVFP', '
 help="prescription to follow: UL18 (default)")
 exec_args.add_argument("-l", "--lumiMask", default=None, metavar='', dest='lumiMask',
 help="path to lumi mask json file")
-exec_args.add_argument("--twoprongSB", default="None", choices=['None','full'], metavar='CHOICE',
+exec_args.add_argument("--twoprongSB", default="full", choices=['None','full'], metavar='CHOICE',
 help="include twoprong sideband: None (default), full")
 exec_args.add_argument("--twoprongExtra", action="store_true", default=False,
 help="modify twoprong object: allow optional extra track")
@@ -155,6 +155,8 @@ run_args.add_argument("--centos_condor", default=False, action="store_true",
 help="submit to old cent os condor nodes")
 run_args.add_argument("--tarball", default=False, action="store_true",
 help="use tarball in prebuild instead of untarred directories")
+parser.add_argument("--memory", default=None,
+help="value for 'request_memory'")
 
 # convenience
 other_args = parser.add_argument_group('misc options')
@@ -428,6 +430,7 @@ if args.output_local:
     if not ret == 0: raise SystemExit('ERROR: Failed to create job reports directory!')
 if args.output_cmslpc and not site == 'hexcms':
   ret = os.system("eos root://cmseos.fnal.gov mkdir -p " + output_path)
+  print("eos root://cmseos.fnal.gov mkdir -p " + output_path)
   if not ret == 0: raise SystemExit('ERROR: Failed to create job output directory in cmslpc eos area!')
 
 # test output
@@ -584,6 +587,7 @@ for i in range(len(infile_tranches)):
   if site == 'hexcms': sub['+SingularityImage'] = '"/cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/el7:x86_64"'
   if site == 'cmslpc': sub['+DesiredOS'] = '"SL7"'
   if site == 'lxplus': sub['+WantOS'] = '"el7"'
+  if args.memory: sub['request_memory'] = str(args.memory)
   subs.append(sub)
 
 # make job directory
