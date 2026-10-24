@@ -1,0 +1,1 @@
+./condor_submit.py /PStoCollimatedPions-PhitoOmegaOmega-EtaPrime_Phi1000Omega0p75_TuneCP5_13TeV_madgraph-pythia8/RunIISummer20UL16MiniAODAPVv2-106X_mcRun2_asymptotic_preVFP_v11-v2/MINIAODSIM /eos/user/h/huwang/Public/ --twoprongSB full -y UL16preVFP -d test --sigRes -f -v --rebuild --twoprongExtra

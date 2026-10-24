@@ -60,8 +60,8 @@ else: raise SystemExit('ERROR: Unrecognized site: not hexcms, cmslpc, or lxplus'
 
 # import condor modules
 try:
-  import classad
-  import htcondor
+  import classad2 as classad
+  import htcondor2 as htcondor
 except ImportError as err:
   if site == 'hexcms' or site == 'lxplus':
     raise err

@@ -12,8 +12,8 @@ elif 'fnal.gov' in hostname: site = 'cmslpc'
 elif 'cern.ch' in hostname: site = 'lxplus'
 else: raise SystemExit('ERROR: Unrecognized site: not hexcms, cmslpc, or lxplus')
 try:
-  import classad
-  import htcondor
+  import classad2 as classad
+  import htcondor2 as htcondor
 except ImportError as err:
   if site == 'hexcms':
     raise err
