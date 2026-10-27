@@ -636,7 +636,7 @@ if site == 'cmslpc':
   collector = htcondor.Collector()
   coll_query = collector.query(htcondor.AdTypes.Schedd, \
   constraint='FERMIHTC_DRAIN_LPCSCHEDD=?=FALSE && FERMIHTC_SCHEDD_TYPE=?="CMSLPC"',
-  projection=["Name", "MyAddress"]
+  projection=["Name", "MyAddress", "CondorVersion"]
   )
   schedd_ad = coll_query[0]
 if site == 'lxplus':
